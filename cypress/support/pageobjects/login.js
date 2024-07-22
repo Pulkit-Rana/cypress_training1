@@ -1,7 +1,7 @@
 export class Login {
 
     getLoginScreen() {
-        return cy.get('.orangehrm-login-container').should("be.visible")
+        return cy.get('.orangehrm-login-container')
     }
 
     getBannerImage() {

@@ -5,19 +5,35 @@ const loginPage = new Login()
 describe("Testing Login Functionality", () => {
 
     beforeEach(() => {
-        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-        cy.fixture('login.json').then((login) => {
-            this.login = login
-        }) 
+        cy.login()
+        cy.log("First way to reduce duplicacy")
+    })
+
+    afterEach(()=>{
+        cy.logout()
     })
 
     it("Testing the Login Page", () => {
-        loginPage.getLoginScreen()
-        loginPage.getBannerImage().should("be.visible").and("exist")
-        loginPage.getUserName().type(this.login.userName, { force: true })
-        loginPage.getPassword().type(this.login.password, { force: true })
-        loginPage.getLoginButton().contains("Login").click({ force: true })
+        cy.logout()
+        loginFunctionality()
+        cy.log("first")
     })
-
-
+    it("Testing the Login Page", () => {
+        loginFunctionality()
+        cy.log("Second")
+    })
+    it("Testing the Login Page", () => {
+        loginFunctionality()
+        loginFunctionality1()
+        cy.log("Third")
+    })
 })
+
+function loginFunctionality(){
+    loginPage.getLoginScreen().should("be.visible")
+    loginPage.getBannerImage().should("be.visible").and("exist")
+    loginPage.getUserName().type("Admin", { force: true })
+    loginPage.getPassword().type("admin123", { force: true })
+    loginPage.getLoginButton().contains("Login").click({ force: true })
+    cy.log("Second way to reduce duplicay")
+}
