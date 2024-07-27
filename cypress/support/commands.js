@@ -15,13 +15,17 @@ import { Login } from "./pageobjects/login"
 
 const loginPage = new Login()
 
+// first intialize the encryptor but using below command
+const encryptor = require('simple-encryptor')(Cypress.env('info'))// key must be secure and should be saved in env to prevent data loss
+
 Cypress.Commands.add('login', () => {
-    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+    cy.visit("/")
     loginPage.getLoginScreen().should("be.visible")
     loginPage.getBannerImage().should("be.visible").and("exist")
-    loginPage.getUserName().type("Admin", { force: true })
-    loginPage.getPassword().type("admin123", { force: true })
+    loginPage.getUserName().type(Cypress.env('userName'), { log: false })
+    loginPage.getPassword().type(encryptor.decrypt(Cypress.env('password')), { log: false })
     loginPage.getLoginButton().contains("Login").click({ force: true })
+    loginPage.getDashboardTab().contains("Dashboard").parent().should('have.class', 'active')
 })
 
 Cypress.Commands.add('logout', () => {
@@ -29,11 +33,7 @@ Cypress.Commands.add('logout', () => {
     cy.get(".oxd-dropdown-menu").should('be.visible')
     cy.get('[role="menuitem"]').contains("Logout").click({ force: true })
 })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+// to decrypt
+// encryptor.decrypt("value/text")

@@ -6,18 +6,19 @@ describe("Testing Login Functionality", () => {
 
     beforeEach(() => {
         cy.login()
-        cy.log("First way to reduce duplicacy")
     })
 
-    afterEach(()=>{
-        cy.logout()
-    })
 
     it("Testing the Login Page", () => {
-        cy.logout()
-        loginFunctionality()
-        cy.log("first")
-    })
+        // cy.wait("@data").then((data) => {
+        //     loginPage.getLoginScreen().should("be.visible")
+        //     loginPage.getBannerImage().should("be.visible").and("exist")
+        //     loginPage.getUserName().type(data.userName, { force: true })
+        //     loginPage.getPassword().type(data.password, { force: true })
+        //     loginPage.getLoginButton().contains("Login").click({ force: true })
+            cy.log("Second way to reduce duplicay")
+        })
+    // })
     it("Testing the Login Page", () => {
         loginFunctionality()
         cy.log("Second")
@@ -29,7 +30,8 @@ describe("Testing Login Functionality", () => {
     })
 })
 
-function loginFunctionality(){
+function loginFunctionality() {
+
     loginPage.getLoginScreen().should("be.visible")
     loginPage.getBannerImage().should("be.visible").and("exist")
     loginPage.getUserName().type("Admin", { force: true })
