@@ -1,4 +1,4 @@
-import { Login } from "../support/pageobjects/login"
+import { Login } from "../../support/pageobjects/login"
 
 
 const loginPage = new Login()

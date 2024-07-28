@@ -1,10 +1,27 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  e2e: {
-    baseUrl: "https://opensource-demo.orangehrmlive.com/web/index.php/"
+  numTestsKeptInMemory: 50,
+  viewportHeight: 1080,
+  viewportWidth: 1920,
+  retries: {
+    runMode: 2,
+    openMode: 3
   },
-
+  fixturesFolder: "orangeHRM/fixtures",
+  downloadsFolder: "orangeHRM/downloads",
+  screenshotOnRunFailure: true,
+  screenshotsFolder: "orangeHRM/failures",
+  trashAssetsBeforeRuns: true,
+  video: true,
+  videosFolder: "orangeHRM/videos",
+  videoCompression: 20,
+  chromeWebSecurity: false,
+  e2e: {
+    baseUrl: "https://opensource-demo.orangehrmlive.com/web/index.php/",
+    supportFile:"orangeHRM/support/e2e.js",
+    specPattern: "orangeHRM/specs/**/*"
+  },
   env: {
     info: "This is a very very string test key.",
     userName: 'Admin',

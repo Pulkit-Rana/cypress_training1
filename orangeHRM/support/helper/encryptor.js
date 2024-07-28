@@ -3,6 +3,6 @@
 // // Create an encryptor
 // var encryptor = require('simple-encryptor')(key);
 
-// var encrypted = encryptor.encrypt('');
+// var encrypted = encryptor.encrypt('adasdas');
 // // Should print gibberish:
 // console.log('encrypted: %s', encrypted);

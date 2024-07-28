@@ -8,5 +8,4 @@ export class CommonPage {
         loginPage.getLoginButton().contains("Login").click({ force: true })
         cy.log("Second way to reduce duplicay")
     }
-
 }
