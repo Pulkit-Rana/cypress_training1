@@ -1,11 +1,12 @@
-export class CommonPage {
+import { Login } from "../pageobjects/login"
 
-    loginFunctionality1() {
-        loginPage.getLoginScreen().should("be.visible")
-        loginPage.getBannerImage().should("be.visible").and("exist")
-        loginPage.getUserName().type("Admin", { force: true })
-        loginPage.getPassword().type("admin123", { force: true })
-        loginPage.getLoginButton().contains("Login").click({ force: true })
-        cy.log("Second way to reduce duplicay")
-    }
+const loginPage = new Login()
+
+export class CommonPage {
+  
+  
+  navigateToTabs(tabName) {
+    loginPage.getDashboardTab().contains(tabName).click({ force: true })
+    loginPage.getDashboardTab().contains(tabName).parent().should("have.class", "active")
+  }
 }

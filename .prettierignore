@@ -1,0 +1,4 @@
+# Ignore Generated Files:
+package-lock.json
+node_modules/*
+README.md

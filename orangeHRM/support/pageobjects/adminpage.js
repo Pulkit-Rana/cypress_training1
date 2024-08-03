@@ -1,3 +1,1 @@
-export class AdminPage{
-    
-}
+export class AdminPage {}

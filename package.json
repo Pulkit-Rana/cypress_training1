@@ -1,8 +1,16 @@
 {
-    "devDependencies": {
-        "cypress": "^13.6.4"
-    },
-    "dependencies": {
-        "simple-encryptor": "^4.0.0"
-    }
+  "scripts": {
+    "start": "cypress run",
+    "pretty": "npx  prettier --write .\"./**/*.{js,json}\"",
+    "lint": "eslint .",
+    "precommit": "npm run pretty && npm run lint"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.4"
+  },
+  "dependencies": {
+    "eslint-plugin-cypress": "^3.4.0",
+    "prettier": "^3.3.3",
+    "simple-encryptor": "^4.0.0"
+  }
 }
