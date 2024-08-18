@@ -34,10 +34,15 @@ jobs:
 
 
       - name: List report directory contents
-        run: ls -la orangeHRM/reports
+        if: always()
+        run: |
+          echo "Listing contents of orangeHRM/reports:"
+          ls -la orangeHRM/reports
   
       - name: Uploading Mochawesome HTML Report
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: mochawesome-html-report
           path: orangeHRM/reports/index.html
+          retention-days: 5
