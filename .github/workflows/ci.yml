@@ -1,0 +1,47 @@
+name: Cypress Tests with Precommit
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  precommit-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Adjust this to match your project's Node.js version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run precommit command
+      - name: Run Precommit Command
+        run: npm run precommit
+
+      # Run Cypress Tests and Generate Mocha Awesome Reports
+      - name: Run Cypress Tests
+        if: success() # Only run if the precommit command passed
+        run: |
+          npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=true
+
+      # Upload Mocha Awesome Report as an artifact
+      - name: Upload Mocha Awesome Report
+        if: always() # Always upload the report, even if tests fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: mochawesome-report
+          path: cypress/reports
