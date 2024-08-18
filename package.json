@@ -7,10 +7,11 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "cypress": "^13.6.4"
+    "cypress": "^13.6.4",
+    "eslint": "^9.9.0",
+    "eslint-plugin-cypress": "^3.5.0"
   },
   "dependencies": {
-    "eslint-plugin-cypress": "^3.4.0",
     "prettier": "^3.3.3",
     "simple-encryptor": "^4.0.0"
   }
