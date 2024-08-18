@@ -1,4 +1,4 @@
-name: Cypress Tests with Precommit
+name: Cypress Tests with Reports
 
 on:
   push:
@@ -33,12 +33,12 @@ jobs:
         run: |
           npx cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=true,json=true
           
-          # Move HTML report to a specific directory for temporary access
-          mkdir -p reports
-          mv cypress/reports/*.html reports/
-          
-          # Optionally, echo report location for reference
-          echo "HTML report can be found at: reports/"
-          
+      - name: Archive Cypress Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-report
+          path: reports/index.html
+          retention-days: 5  # Keeps the artifact for 5 days
+
       - name: List report directory contents
         run: ls -la reports
