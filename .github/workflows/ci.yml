@@ -27,14 +27,14 @@ jobs:
 
       - name: Run Cypress Tests
         run: |
-          npx cypress run --reporter mochawesome --reporter-options reportDir=reports,reportFilename=index,overwrite=false,html=true,json=false
-          
-      - name: Archive Cypress Report
+          npx cypress run --reporter cypress-mochawesome-reporter
+
+      - name: Uploading Mochawesome HTML Report
         uses: actions/upload-artifact@v3
         with:
-          name: cypress-report
-          path: reports/index.html
-          retention-days: 5
+          name: mochawesome-html-report
+          path: orangeHRM/reports/index.html
+          retention-days: 5 
 
       - name: List report directory contents
-        run: ls -la reports
+        run: ls -la orangeHRM/reports
