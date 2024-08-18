@@ -1,16 +1,12 @@
-name: Cypress Tests with Reports
+name: Cypress Check Results with Reports
 
 on:
   push:
     branches:
       - main
-      - 'feature/*'
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  test:
+  cyress-run:
     runs-on: ubuntu-latest
 
     steps:
