@@ -32,9 +32,9 @@ jobs:
       - name: Uploading Mochawesome HTML Report
         uses: actions/upload-artifact@v3
         with:
-          name: mochawesome-html-report
-          path: orangeHRM/reports/index.html
-          retention-days: 5 
-
+            name: mochawesome-html-report
+            path: orangeHRM/reports/index.html
+            retention-days: 5  # Keeps the artifact for 5 days
+  
       - name: List report directory contents
         run: ls -la orangeHRM/reports
