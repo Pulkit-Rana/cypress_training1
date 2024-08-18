@@ -3,7 +3,7 @@ const { defineConfig } = require("cypress")
 module.exports = defineConfig({
   reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
-    reportDir: 'reports',
+    reportDir: 'orangeHRM/reports',
     charts: true,
     reportPageTitle: 'Test Results',
     embeddedScreenshots: true,
