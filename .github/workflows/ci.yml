@@ -23,21 +23,21 @@ jobs:
           node-version: '20'
 
       - name: Create Reports Directory
-        run: mkdir -p orangeHMR/reports
+        run: mkdir -p orangeHRM/reports/.jsons
 
       - name: Install dependencies
         run: npm install
 
       - name: Run Cypress Tests
         run: |
-          npx cypress run --reporter cypress-mochawesome-reporter
+          npx cypress run --reporter cypress-mochawesome-reporter --reporter-options reportDir=orangeHRM/reports/.jsons,reportFilename=index,overwrite=false,html=true,json=true
 
+
+      - name: List report directory contents
+        run: ls -la orangeHRM/reports
+  
       - name: Uploading Mochawesome HTML Report
         uses: actions/upload-artifact@v3
         with:
-            name: mochawesome-html-report
-            path: orangeHRM/reports/index.html
-            retention-days: 5  # Keeps the artifact for 5 days
-  
-      - name: List report directory contents
-        run: ls -la orangeHRM/reports
+          name: mochawesome-html-report
+          path: orangeHRM/reports/index.html
