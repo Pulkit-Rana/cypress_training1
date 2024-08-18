@@ -6,6 +6,7 @@
     "precommit": "npm run pretty && npm run lint"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "cypress": "^13.6.4"
   },
   "dependencies": {
