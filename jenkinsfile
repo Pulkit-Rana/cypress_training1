@@ -11,67 +11,51 @@ def getBuildUser() {
 
 pipeline {
     agent any
-    
+
     environment {
         NODE_VERSION = '20'
-        REPORT_DIR = 'reports'
+        REPORT_DIR = 'cypress/report'
         BUILD_USER = ''
     }
-    
+
     parameters {
-        string(name: 'SPEC', defaultValue: 'orangeHRM/specs/**/**', description: 'test: orangeHRM/specs/*.cy.js')
+        string(name: 'SPEC', defaultValue: 'cypress/integration/**/**', description: 'Ej: cypress/integration/pom/*.spec.js')
         choice(name: 'BROWSER', choices: ['chrome', 'edge', 'firefox'], description: 'Pick the web browser you want to use to run your scripts')
-    }
-    
-    options {
-        ansiColor('xterm')
     }
 
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    checkout scm
-                }
+                checkout scm
             }
         }
 
         stage('Set Up Node.js') {
             steps {
-                script {
-                    withEnv(["PATH+NODE=${tool name: 'NodeJS', type: 'NodeJSInstallation'}/bin"]) {
-                        sh "node -v"
-                        sh "npm -v"
-                    }
+                withEnv(["PATH+NODE=${tool name: 'NodeJS', type: 'NodeJSInstallation'}/bin"]) {
+                    sh "node -v"
+                    sh "npm -v"
                 }
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    sh "npm install"
-                }
+                sh "npm install"
             }
         }
 
-        stage('Build') {
+        stage('Run Cypress Tests') {
             steps {
-                echo "Building the application"
-            }
-        }
-        
-        stage('Testing') {
-            steps {
-                script {
+                ansiColor('xterm') {
                     sh "npx cypress run --browser ${params.BROWSER} --spec ${params.SPEC} --reporter mochawesome --reporter-options reportDir=${REPORT_DIR},overwrite=false,html=true,json=true"
                 }
             }
         }
-        
-        stage('Deploy') {
+
+        stage('List Report Directory Contents') {
             steps {
-                echo "Deploying"
+                sh "ls -la ${REPORT_DIR}"
             }
         }
     }
@@ -81,13 +65,13 @@ pipeline {
             script {
                 BUILD_USER = getBuildUser()
             }
-            
+
             slackSend(
                 channel: '#jenkins-example',
                 color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\nTests: ${params.SPEC} executed on ${params.BROWSER}\nMore info at: ${env.BUILD_URL}HTML_20Report/"
             )
-            
+
             publishHTML([
                 allowMissing: false, 
                 alwaysLinkToLastBuild: false, 
@@ -102,4 +86,3 @@ pipeline {
         }
     }
 }
-s
