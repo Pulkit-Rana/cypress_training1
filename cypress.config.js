@@ -2,6 +2,14 @@ const { defineConfig } = require("cypress")
 
 module.exports = defineConfig({
   reporter: "cypress-mochawesome-reporter",
+  reporterOptions: {
+    reportDir: 'reports',
+    charts: true,
+    reportPageTitle: 'Test Results',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+  },
   defaultCommandTimeout: 80000,
   numTestsKeptInMemory: 50,
   viewportHeight: 1080,
@@ -15,7 +23,7 @@ module.exports = defineConfig({
   screenshotOnRunFailure: true,
   screenshotsFolder: "orangeHRM/failures",
   trashAssetsBeforeRuns: true,
-  video: true,
+  video: false,
   videosFolder: "orangeHRM/videos",
   videoCompression: 20,
   chromeWebSecurity: false,
