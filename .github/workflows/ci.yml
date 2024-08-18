@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  precommit-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,20 +25,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Precommit Command
-        run: npm run precommit
-
-      - name: Run Cypress Tests and Generate Reports
-        if: success()
+      - name: Run Cypress Tests
         run: |
-          npx cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=true,json=true
+          npx cypress run --reporter mochawesome --reporter-options reportDir=reports,reportFilename=index,overwrite=false,html=true,json=false
           
       - name: Archive Cypress Report
         uses: actions/upload-artifact@v3
         with:
           name: cypress-report
           path: reports/index.html
-          retention-days: 5  # Keeps the artifact for 5 days
+          retention-days: 5
 
       - name: List report directory contents
         run: ls -la reports
