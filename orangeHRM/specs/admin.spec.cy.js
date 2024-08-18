@@ -78,9 +78,10 @@ describe("To verify the Admin Page", () => {
         .find(`[role="option"]`)
         .contains("Admin")
         .click({ force: true })
-      cy.get(`[placeholder="Type for hints..."]`, { timeout: 10000 })
-        .click({ force: true })
-        .type(admin.empName, { delay: 200 })
+      cy.get(`[placeholder="Type for hints..."]`, { timeout: 10000 }).click({ force: true })
+      cy.get(`[placeholder="Type for hints..."]`, { timeout: 10000 }).type(admin.empName, {
+        delay: 200,
+      })
       cy.wait("@emplist")
       cy.get("@listbox").should("be.visible").find(`[role="option"]`).first().click({ force: true })
       cy.get(".oxd-select-text.oxd-select-text--active").eq(1).click({ force: true })
@@ -116,9 +117,10 @@ describe("To verify the Admin Page", () => {
         .find(`[role="option"]`)
         .contains("Enabled")
         .click({ force: true })
-      cy.get(`[placeholder="Type for hints..."]`, { timeout: 10000 })
-        .click({ force: true })
-        .type(admin.empName, { delay: 200 })
+      cy.get(`[placeholder="Type for hints..."]`, { timeout: 10000 }).click({ force: true })
+      cy.get(`[placeholder="Type for hints..."]`, { timeout: 10000 }).type(admin.empName, {
+        delay: 200,
+      })
       cy.wait("@emplist")
       cy.get("@listbox").should("be.visible").find(`[role="option"]`).first().click({ force: true })
       cy.get(".oxd-input-field-bottom-space .oxd-input.oxd-input--active")

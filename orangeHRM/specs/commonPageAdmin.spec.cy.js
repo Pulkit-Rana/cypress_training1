@@ -1,5 +1,7 @@
-import { CommonPage, psoafsasd } from "../support/helper/commonPage"
+import { CommonPage } from "../support/helper/commonPage"
+import { Login } from "../support/pageobjects/login"
 
+const loginPage = new Login()
 const commonPage = new CommonPage()
 
 describe("To verify the Admin Page", () => {
@@ -25,7 +27,7 @@ describe("To verify the Admin Page", () => {
   })
 })
 
-function navigate() {
+function navigate(tabName) {
   loginPage.getDashboardTab().contains(tabName).click({ force: true })
   loginPage.getDashboardTab().contains(tabName).parent().should("have.class", "active")
 }
