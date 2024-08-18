@@ -14,12 +14,12 @@ pipeline {
 
     environment {
         NODE_VERSION = '20'
-        REPORT_DIR = 'cypress/report'
+        REPORT_DIR = 'reports'
         BUILD_USER = ''
     }
 
     parameters {
-        string(name: 'SPEC', defaultValue: 'cypress/integration/**/**', description: 'Ej: cypress/integration/pom/*.spec.js')
+        string(name: 'SPEC', defaultValue: 'orangeHRM/specs/**/**', description: 'Find Spec Files')
         choice(name: 'BROWSER', choices: ['chrome', 'edge', 'firefox'], description: 'Pick the web browser you want to use to run your scripts')
     }
 
