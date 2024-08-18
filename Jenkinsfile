@@ -86,3 +86,7 @@ pipeline {
         }
     }
 }
+<<<<<<< HEAD:jenkinsfile
+=======
+s
+>>>>>>> 8f3e9ba517722260dd6279e65b2ff6dda07475d7:Jenkinsfile
